@@ -1,12 +1,13 @@
 const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".filters");
-
+let works = [];
 const urlApi = "http://localhost:5678/api/";
 async function getWorks() {
   const answer = await fetch(urlApi + "works");
-  const works = await answer.json();
+  works = await answer.json();
   works.forEach((work) => {
     const figureElement = document.createElement("figure");
+    figureElement.dataset.category = work.categoryId;
     const imageElement = document.createElement("img");
     imageElement.src = work.imageUrl;
     imageElement.alt = work.title;
@@ -22,19 +23,31 @@ getWorks();
 async function getCategories() {
   const answer = await fetch(urlApi + "categories");
   const categories = await answer.json();
-  console.log(categories);
-  const buttonAll= document.createElement ("button")
-    buttonAll.textContent = "Tous"
-    buttonAll.classList.add("filter-button")
-    filters.appendChild(buttonAll)
-  categories.forEach((category)=>{
-    const buttonFilters= document.createElement ("button")
-    buttonFilters.textContent = category.name
-    buttonFilters.classList.add("filter-button")  
-    filters.appendChild(buttonFilters)
-    
-    
-
-  })
+  const buttonAll = document.createElement("button");
+  buttonAll.textContent = "Tous";
+  buttonAll.classList.add("filter-button");
+  filters.appendChild(buttonAll);
+  buttonAll.addEventListener("click", function () {
+    const figures = document.querySelectorAll(".gallery figure");
+    figures.forEach((figure) => {
+      figure.style.display = "";
+    });
+  });
+  categories.forEach((category) => {
+    const buttonFilters = document.createElement("button");
+    buttonFilters.textContent = category.name;
+    buttonFilters.classList.add("filter-button");
+    filters.appendChild(buttonFilters);
+    buttonFilters.addEventListener("click", function () {
+      const figures = document.querySelectorAll(".gallery figure");
+      figures.forEach((figure) => {
+        if (Number(figure.dataset.category) === category.id) {
+          figure.style.display = "";
+        } else {
+          figure.style.display = "none";
+        }
+      });
+    });
+  });
 }
-getCategories()
+getCategories();
