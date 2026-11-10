@@ -26,8 +26,14 @@ async function getCategories() {
   const buttonAll = document.createElement("button");
   buttonAll.textContent = "Tous";
   buttonAll.classList.add("filter-button");
+  buttonAll.classList.add("active");
   filters.appendChild(buttonAll);
   buttonAll.addEventListener("click", function () {
+    const buttons = document.querySelectorAll(".filter-button");
+    buttons.forEach((button) => {
+      button.classList.remove("active");
+    });
+    buttonAll.classList.add("active");
     const figures = document.querySelectorAll(".gallery figure");
     figures.forEach((figure) => {
       figure.style.display = "";
@@ -39,6 +45,11 @@ async function getCategories() {
     buttonFilters.classList.add("filter-button");
     filters.appendChild(buttonFilters);
     buttonFilters.addEventListener("click", function () {
+      const buttons = document.querySelectorAll(".filter-button");
+      buttons.forEach((button) => {
+        button.classList.remove("active");
+      });
+      buttonFilters.classList.add("active");
       const figures = document.querySelectorAll(".gallery figure");
       figures.forEach((figure) => {
         if (Number(figure.dataset.category) === category.id) {
