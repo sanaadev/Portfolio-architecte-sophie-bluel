@@ -1,5 +1,6 @@
 let gallery = document.querySelector(".gallery");
 let filters = document.querySelector(".filters");
+let login = document.querySelector(".login-link")
 let works = [];
 const urlApi = "http://localhost:5678/api/";
 async function getWorks() {
@@ -61,3 +62,16 @@ async function getCategories() {
   });
 }
 getCategories();
+
+const token = localStorage.getItem("token");
+if (token) {
+  login.textContent ="logout";
+  login.addEventListener("click",(event)=>{
+    event.preventDefault()
+    localStorage.removeItem("token")
+    window.location.reload()
+  })
+} else {    
+    login.textContent= "login";
+  }
+
