@@ -135,6 +135,23 @@ body {
   font-family: "Work Sans";
   font-size: 14px;
 }
+.edit-mode{
+  width: 100vw;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 59px;
+  color: #fff;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 5px;
+}
+html {
+  overflow-x: hidden;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -183,7 +200,7 @@ li:hover {
   align-items: center;
 }
 #introduction figure {
-  flex: 1;
+  flex: 1; 
 }
 #introduction img {
   display: block;
@@ -355,4 +372,28 @@ nav a{
   font-size: 14px;
   
 }
- 
+
+.myprojects{
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+    
+}
+
+.edit-button{
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fffef8;
+  margin-bottom: 2em;
+  gap: 5px;
+  font-family: "Work Sans" ;
+  font-size: 14px;
+}
+
+ .hidden {
+  display: none;
+}

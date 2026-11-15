@@ -10,11 +10,19 @@
       href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
+    <div class="edit-mode hidden">
+      <i class="fa-regular fa-pen-to-square"></i>
+      <p>Mode Edition</p>
+    </div>
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
@@ -51,10 +59,15 @@
         </article>
       </section>
       <section id="portfolio">
-        <h2>Mes Projets</h2>
+        <div class="myprojects">
+          <h2>Mes Projets</h2>
+          <button class="edit-button hidden">
+            <i class="fa-regular fa-pen-to-square"></i>
+            <span>modifier</span>
+          </button>
+        </div>
         <div class="filters"></div>
-        <div class="gallery">
-          
+        <div class="gallery"></div>
       </section>
       <section id="contact">
         <h2>Contact</h2>

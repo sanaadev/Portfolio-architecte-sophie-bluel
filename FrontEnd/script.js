@@ -1,6 +1,8 @@
 let gallery = document.querySelector(".gallery");
 let filters = document.querySelector(".filters");
-let login = document.querySelector(".login-link")
+let login = document.querySelector(".login-link");
+let editMode = document.querySelector(".edit-mode");
+let editButton  = document.querySelector(".edit-button");
 let works = [];
 const urlApi = "http://localhost:5678/api/";
 async function getWorks() {
@@ -66,6 +68,11 @@ getCategories();
 const token = localStorage.getItem("token");
 if (token) {
   login.textContent ="logout";
+   editMode.classList.remove("hidden")
+   filters.classList.add("hidden")
+   editButton.classList.remove("hidden")
+
+  
   login.addEventListener("click",(event)=>{
     event.preventDefault()
     localStorage.removeItem("token")
@@ -73,5 +80,6 @@ if (token) {
   })
 } else {    
     login.textContent= "login";
+   
   }
 
