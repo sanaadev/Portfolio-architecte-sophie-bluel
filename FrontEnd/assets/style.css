@@ -135,7 +135,7 @@ body {
   font-family: "Work Sans";
   font-size: 14px;
 }
-.edit-mode{
+.edit-mode {
   width: 100vw;
   background: #000;
   display: flex;
@@ -200,7 +200,7 @@ li:hover {
   align-items: center;
 }
 #introduction figure {
-  flex: 1; 
+  flex: 1;
 }
 #introduction img {
   display: block;
@@ -312,22 +312,22 @@ footer nav ul {
 }
 /* *********css login.page **************** */
 
-nav a{
-   color: inherit;
+nav a {
+  color: inherit;
   text-decoration: none;
- }
+}
 
-  .nav-login{
+.nav-login {
   font-weight: 700;
- }
+}
 
-.login-page{
+.login-page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.login-page main{
+.login-page main {
   flex-grow: 1;
 }
 
@@ -356,32 +356,87 @@ nav a{
   background: #fff;
 }
 
-.login-button{
+.login-button {
   width: 179px;
   height: 36px;
-  border:none
+  border: none;
 }
- .error-message{
-  color: #D32F2F;
-  margin-top:5px;
+.error-message {
+  color: #d32f2f;
+  margin-top: 5px;
   font-weight: 600;
- }
+}
 
 .forgot-password {
   text-align: center;
   color: #3d3d3d;
   font-size: 14px;
- }
+}
 
-.myprojects{
+.myprojects {
   display: flex;
   gap: 15px;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-    
 }
 
- .hidden {
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal {
+  width: 630px;
+  height: 688px;
+  border-radius: 10px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+}
+.gallery-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  font-family: "Work Sans";
+  font-size: 26px;
+  font-weight: 400;
+}
+ .modal hr {
+  width: 420px;
+  border: none;
+border-top: 1px solid #B3B3B3;
+ }
+
+.add-photo-button {
+  min-width: 237px;
+  height: 36px;
+  border-radius: 60px;
+  border: solid 1px #1d6154;
+  font-size: 14px;
+  background: #1d6154;
+  color: #fffef8;
+  padding: 2px 12px;
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.hidden {
   display: none;
 }
