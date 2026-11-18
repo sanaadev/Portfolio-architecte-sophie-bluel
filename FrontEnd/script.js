@@ -6,6 +6,7 @@ let editButton  = document.querySelector(".edit-button");
 let modalOverlay = document.querySelector(".modal-overlay")
 let modal = document.querySelectorAll(".modal")
 let closeButtons = document.querySelectorAll(".close-button");
+let modalGallery = document.querySelector(".modal-gallery");
 let works = [];
 const urlApi = "http://localhost:5678/api/";
 async function getWorks() {
@@ -22,6 +23,18 @@ async function getWorks() {
     gallery.appendChild(figureElement);
     figureElement.appendChild(imageElement);
     figureElement.appendChild(captionElement);
+    let thumbnail = document.createElement("figure")
+    thumbnail.classList.add("thumbnail")
+    let thumbnailImage = document.createElement("img");
+    thumbnailImage.src = work.imageUrl;
+    thumbnailImage.alt = work.title;
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete-button");
+    deleteButton.dataset.id = work.id;
+    deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+     modalGallery.appendChild(thumbnail);
+    thumbnail.appendChild(thumbnailImage);
+    thumbnail.appendChild(deleteButton);
   });
 }
 getWorks();
