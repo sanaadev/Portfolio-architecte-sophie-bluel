@@ -380,7 +380,18 @@ nav a {
   justify-content: center;
   margin-bottom: 20px;
 }
-
+.edit-button {
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fffef8;
+  margin-bottom: 2em;
+  gap: 5px;
+  font-family: "Work Sans";
+  font-size: 14px;
+  cursor: pointer;
+}
 .modal-overlay {
   background: rgba(0, 0, 0, 0.3);
   position: fixed;

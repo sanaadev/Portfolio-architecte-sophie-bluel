@@ -3,6 +3,9 @@ let filters = document.querySelector(".filters");
 let login = document.querySelector(".login-link");
 let editMode = document.querySelector(".edit-mode");
 let editButton  = document.querySelector(".edit-button");
+let modalOverlay = document.querySelector(".modal-overlay")
+let modal = document.querySelectorAll(".modal")
+let closeButtons = document.querySelectorAll(".close-button");
 let works = [];
 const urlApi = "http://localhost:5678/api/";
 async function getWorks() {
@@ -72,14 +75,34 @@ if (token) {
    filters.classList.add("hidden")
    editButton.classList.remove("hidden")
 
-  
+   //  Pour la déconnexion
   login.addEventListener("click",(event)=>{
     event.preventDefault()
     localStorage.removeItem("token")
     window.location.reload()
-  })
+    
+  });
+  //  Pour ouvrir la modale
+  editButton.addEventListener("click", () => {
+    modalOverlay.classList.remove("hidden");
+  });
+  // Fermer avec les croix
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      modalOverlay.classList.add("hidden");
+    });
+  });
+
+  // Fermer en cliquant en dehors de la fenêtre
+  modalOverlay.addEventListener("click", (event) => {
+    if (event.target === modalOverlay) {
+      modalOverlay.classList.add("hidden");
+    }
+  });
 } else {    
     login.textContent= "login";
    
   }
+
+
 
