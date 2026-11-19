@@ -2,9 +2,9 @@ let gallery = document.querySelector(".gallery");
 let filters = document.querySelector(".filters");
 let login = document.querySelector(".login-link");
 let editMode = document.querySelector(".edit-mode");
-let editButton  = document.querySelector(".edit-button");
-let modalOverlay = document.querySelector(".modal-overlay")
-let modal = document.querySelectorAll(".modal")
+let editButton = document.querySelector(".edit-button");
+let modalOverlay = document.querySelector(".modal-overlay");
+let modal = document.querySelectorAll(".modal");
 let closeButtons = document.querySelectorAll(".close-button");
 let modalGallery = document.querySelector(".modal-gallery");
 let works = [];
@@ -23,8 +23,8 @@ async function getWorks() {
     gallery.appendChild(figureElement);
     figureElement.appendChild(imageElement);
     figureElement.appendChild(captionElement);
-    let thumbnail = document.createElement("figure")
-    thumbnail.classList.add("thumbnail")
+    let thumbnail = document.createElement("figure");
+    thumbnail.classList.add("thumbnail");
     let thumbnailImage = document.createElement("img");
     thumbnailImage.src = work.imageUrl;
     thumbnailImage.alt = work.title;
@@ -32,9 +32,24 @@ async function getWorks() {
     deleteButton.classList.add("delete-button");
     deleteButton.dataset.id = work.id;
     deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-     modalGallery.appendChild(thumbnail);
+    modalGallery.appendChild(thumbnail);
     thumbnail.appendChild(thumbnailImage);
     thumbnail.appendChild(deleteButton);
+    deleteButton.addEventListener("click", async (event) => {
+      event.preventDefault();
+      console.log(deleteButton.dataset.id);
+      let removeProjects = await fetch(
+        urlApi + "works/" + deleteButton.dataset.id,
+        {
+          method: "delete",
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        },
+      );
+
+      console.log(removeProjects.status);
+      figureElement.remove();
+      thumbnail.remove();
+    });
   });
 }
 getWorks();
@@ -44,7 +59,7 @@ async function getCategories() {
   let categories = await response.json();
   let buttonAll = document.createElement("button");
   buttonAll.textContent = "Tous";
-  buttonAll.classList.add("filter-button","active");
+  buttonAll.classList.add("filter-button", "active");
   filters.appendChild(buttonAll);
   buttonAll.addEventListener("click", function () {
     let buttons = document.querySelectorAll(".filter-button");
@@ -83,17 +98,16 @@ getCategories();
 
 const token = localStorage.getItem("token");
 if (token) {
-  login.textContent ="logout";
-   editMode.classList.remove("hidden")
-   filters.classList.add("hidden")
-   editButton.classList.remove("hidden")
+  login.textContent = "logout";
+  editMode.classList.remove("hidden");
+  filters.classList.add("hidden");
+  editButton.classList.remove("hidden");
 
-   //  Pour la déconnexion
-  login.addEventListener("click",(event)=>{
-    event.preventDefault()
-    localStorage.removeItem("token")
-    window.location.reload()
-    
+  //  Pour la déconnexion
+  login.addEventListener("click", (event) => {
+    event.preventDefault();
+    localStorage.removeItem("token");
+    window.location.reload();
   });
   //  Pour ouvrir la modale
   editButton.addEventListener("click", () => {
@@ -112,10 +126,6 @@ if (token) {
       modalOverlay.classList.add("hidden");
     }
   });
-} else {    
-    login.textContent= "login";
-   
-  }
-
-
-
+} else {
+  login.textContent = "login";
+}
