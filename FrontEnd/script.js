@@ -47,8 +47,13 @@ async function getWorks() {
       );
 
       console.log(removeProjects.status);
-      figureElement.remove();
+      // Retire le projet de la page seulement si l'API confirme la suppression
+      if (removeProjects.ok){
+        figureElement.remove();
       thumbnail.remove();
+
+      }
+      
     });
   });
 }
