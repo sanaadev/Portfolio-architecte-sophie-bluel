@@ -42,7 +42,7 @@ async function getWorks() {
         urlApi + "works/" + deleteButton.dataset.id,
         {
           method: "delete",
-          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+          headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
         },
       );
 
@@ -96,7 +96,7 @@ async function getCategories() {
 }
 getCategories();
 
-const token = localStorage.getItem("token");
+const token = sessionStorage.getItem("token");
 if (token) {
   login.textContent = "logout";
   editMode.classList.remove("hidden");
@@ -106,7 +106,7 @@ if (token) {
   //  Pour la déconnexion
   login.addEventListener("click", (event) => {
     event.preventDefault();
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     window.location.reload();
   });
   //  Pour ouvrir la modale
