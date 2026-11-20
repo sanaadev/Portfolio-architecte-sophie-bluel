@@ -11,6 +11,7 @@ let galleryView = document.querySelector(".gallery-view");
 let formView = document.querySelector(".form-view");
 let addPhotoButton = document.querySelector(".add-photo-button");
 let backButton = document.querySelector(".back-button");
+let categorySelect = document.getElementById("category")
 
 let works = [];
 const urlApi = "http://localhost:5678/api/";
@@ -86,7 +87,11 @@ async function getCategories() {
     let buttonFilters = document.createElement("button");
     buttonFilters.textContent = category.name;
     buttonFilters.classList.add("filter-button");
+    let optionSelect = document.createElement("option")
+    optionSelect.textContent= category.name
+    optionSelect.value = category.id
     filters.appendChild(buttonFilters);
+    categorySelect.appendChild(optionSelect)
     buttonFilters.addEventListener("click", function () {
       let buttons = document.querySelectorAll(".filter-button");
       buttons.forEach((button) => {
