@@ -113,20 +113,26 @@
             <i class="fa-solid fa-xmark"></i>
           </button>
           <h3 class="title-add-photo">Ajout photo</h3>
-          <form action="#">
+          <form  class= "add-project-form" action="#">
             <div class="photo-zone">
               <i class="fa-regular fa-image"></i>
               <label for="image">+ Ajouter photo</label>
               <input
-                class="load-file" type="file" name="image"              accept=".jpg, .jpeg, .png" id="image"/>
-                <p>jpg, png : 4mo max</p>
+                class="load-file"
+                type="file"
+                name="image"
+                accept=".jpg, .jpeg, .png"
+                id="image"
+              />
+              <p>jpg, png : 4mo max</p>
             </div>
             <label for="title">Titre</label>
-            <input type="text" name="title" id="title">
+            <input type="text" name="title" id="title" />
             <label for="category">Catégorie</label>
-            <select name="category" id="category">           
+            <select name="category" id="category">
+              <option value=""></option>
             </select>
-            <hr>
+            <hr />
             <button class="btn-submit" type="submit" disabled>Valider</button>
           </form>
         </div>

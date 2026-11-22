@@ -397,9 +397,8 @@ nav a {
   margin-left: 20px;
   top: 50%;
   transform: translateY(-50%);
-  
 }
-
+/* ===== Modal ===== */
 .modal-overlay {
   background: rgba(0, 0, 0, 0.3);
   position: fixed;
@@ -426,6 +425,8 @@ nav a {
   background: #fff;
   cursor: pointer;
 }
+
+/* ===== Modal: gallery view ===== */
 .gallery-view {
   display: flex;
   flex-direction: column;
@@ -489,6 +490,91 @@ nav a {
 .delete-button i {
   font-size: 11px;
 }
+/* ===== Modal : view form ===== */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border: none;
+  background: none;
+  font-size: 21px;
+  color: #000;
+}
+
+.title-add-photo {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 400;
+  font-family: "Work Sans";
+  margin-bottom: 15px;
+}
+.photo-zone {
+  display: flex;
+  flex-direction: column;
+  background: #e8f1f6;
+  width: 420px;
+  height: 169px;
+  border-radius: 3px;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+.photo-zone i {
+  color: #b9b5cc;
+  font-size: 60px;
+}
+
+.photo-zone label {
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #cbd6dc;
+  width: 173px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Work Sans";
+  color: #306685;
+  padding: 5px 5px;
+  box-sizing: border-box;
+}
+.load-file {
+  display: none;
+}
+
+.add-project-form {
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  gap: 15px;
+}
+.add-project-form input,
+.add-project-form select {
+  height: 51px;
+  background: #fff;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.btn-submit  {
+  width: 237px;
+  height: 36px;
+  border-radius: 60px;
+  color: #fff;
+  border: none;
+  margin: auto;
+  font-family: "Syne";
+  font-weight: 700;
+  font-size: 14px;
+  background:#1d6154;
+
+}
+ /* when the button is disabled */
+ .btn-submit:disabled { 
+  background: #a7a7a7;
+ } 
+
 .hidden {
   display: none;
 }
