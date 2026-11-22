@@ -115,8 +115,9 @@
           <h3 class="title-add-photo">Ajout photo</h3>
           <form  class= "add-project-form" action="#">
             <div class="photo-zone">
-              <i class="fa-regular fa-image"></i>
-              <label for="image">+ Ajouter photo</label>
+              <img  class="img-photo-zone hidden" src="" alt="Aperçu de la photo">
+              <i class="fa-regular fa-image icon-photo"></i>
+              <label class="txt-add-photo" for="image">+ Ajouter photo</label>
               <input
                 class="load-file"
                 type="file"
@@ -124,7 +125,7 @@
                 accept=".jpg, .jpeg, .png"
                 id="image"
               />
-              <p>jpg, png : 4mo max</p>
+              <p class="type-photo">jpg, png : 4mo max</p>
             </div>
             <label for="title">Titre</label>
             <input type="text" name="title" id="title" />

@@ -11,7 +11,12 @@ let galleryView = document.querySelector(".gallery-view");
 let formView = document.querySelector(".form-view");
 let addPhotoButton = document.querySelector(".add-photo-button");
 let backButton = document.querySelector(".back-button");
-let categorySelect = document.getElementById("category")
+let categorySelect = document.getElementById("category");
+let imgPhotoZone = document.querySelector(".img-photo-zone");
+let fileInput = document.querySelector(".load-file");
+let txtAddPhoto = document.querySelector(".txt-add-photo");
+let iconPhoto = document.querySelector(".icon-photo");
+let typePhoto = document.querySelector(".type-photo");
 
 let works = [];
 const urlApi = "http://localhost:5678/api/";
@@ -87,11 +92,11 @@ async function getCategories() {
     let buttonFilters = document.createElement("button");
     buttonFilters.textContent = category.name;
     buttonFilters.classList.add("filter-button");
-    let optionSelect = document.createElement("option")
-    optionSelect.textContent= category.name
-    optionSelect.value = category.id
+    let optionSelect = document.createElement("option");
+    optionSelect.textContent = category.name;
+    optionSelect.value = category.id;
     filters.appendChild(buttonFilters);
-    categorySelect.appendChild(optionSelect)
+    categorySelect.appendChild(optionSelect);
     buttonFilters.addEventListener("click", function () {
       let buttons = document.querySelectorAll(".filter-button");
       buttons.forEach((button) => {
@@ -142,15 +147,22 @@ if (token) {
     if (event.target === modalOverlay) {
       modalOverlay.classList.add("hidden");
     }
+  });
 
-    addPhotoButton.addEventListener("click", () => {
-      galleryView.classList.add("hidden");
-      formView.classList.remove("hidden");
-    });
-    backButton.addEventListener("click", () => {
-      formView.classList.add("hidden");
-      galleryView.classList.remove("hidden");
-    });
+  addPhotoButton.addEventListener("click", () => {
+    galleryView.classList.add("hidden");
+    formView.classList.remove("hidden");
+  });
+  backButton.addEventListener("click", () => {
+    formView.classList.add("hidden");
+    galleryView.classList.remove("hidden");
+  });
+  fileInput.addEventListener("change", () => {
+    imgPhotoZone.src = URL.createObjectURL(fileInput.files[0]);
+    imgPhotoZone.classList.remove("hidden");
+    txtAddPhoto.classList.add("hidden");
+    iconPhoto.classList.add("hidden");
+    typePhoto.classList.add("hidden");
   });
 } else {
   login.textContent = "login";
