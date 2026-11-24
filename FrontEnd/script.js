@@ -17,6 +17,8 @@ let fileInput = document.querySelector(".load-file");
 let txtAddPhoto = document.querySelector(".txt-add-photo");
 let iconPhoto = document.querySelector(".icon-photo");
 let typePhoto = document.querySelector(".type-photo");
+let titleInput = document.querySelector(".title-input");
+let btnSubmit = document.querySelector(".btn-submit");
 
 let works = [];
 const urlApi = "http://localhost:5678/api/";
@@ -163,7 +165,27 @@ if (token) {
     txtAddPhoto.classList.add("hidden");
     iconPhoto.classList.add("hidden");
     typePhoto.classList.add("hidden");
+    checkForm();
+  });
+  titleInput.addEventListener("input", () => {
+    checkForm();
+  });
+
+  categorySelect.addEventListener("change", () => {
+    checkForm();
   });
 } else {
   login.textContent = "login";
+}
+
+function checkForm() {
+  if (
+    titleInput.value !== "" &&
+    fileInput.files.length !== 0 &&
+    categorySelect.value !== ""
+  ) {
+    btnSubmit.disabled = false;
+  } else {
+    btnSubmit.disabled = true;
+  }
 }
