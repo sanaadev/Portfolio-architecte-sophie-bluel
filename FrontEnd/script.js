@@ -20,6 +20,7 @@ let typePhoto = document.querySelector(".type-photo");
 let titleInput = document.querySelector(".title-input");
 let btnSubmit = document.querySelector(".btn-submit");
 let addProjectForm = document.querySelector(".add-project-form");
+let errorFile = document.querySelector(".error-file");
 
 let works = [];
 const urlApi = "http://localhost:5678/api/";
@@ -144,6 +145,7 @@ if (token) {
   closeButtons.forEach((button) => {
     button.addEventListener("click", () => {
       modalOverlay.classList.add("hidden");
+      resetForm();
     });
   });
 
@@ -151,6 +153,7 @@ if (token) {
   modalOverlay.addEventListener("click", (event) => {
     if (event.target === modalOverlay) {
       modalOverlay.classList.add("hidden");
+      resetForm();
     }
   });
 
@@ -161,8 +164,23 @@ if (token) {
   backButton.addEventListener("click", () => {
     formView.classList.add("hidden");
     galleryView.classList.remove("hidden");
+    resetForm();
   });
   fileInput.addEventListener("change", () => {
+    let file = fileInput.files[0]; // je range l'image dans "file"
+    const allowedTypes = ["image/png", "image/jpeg"];
+    if (file.size > 4 * 1024 * 1024) {
+      errorFile.textContent = "Image trop lourde (4 Mo max)";
+      fileInput.value = "";
+      return;
+    }
+    if (!allowedTypes.includes(file.type)) {
+      errorFile.textContent = "Format non accepté (jpg,png)";
+      fileInput.value = "";
+
+      return;
+    }
+    errorFile.textContent = "";;
     imgPhotoZone.src = URL.createObjectURL(fileInput.files[0]);
     imgPhotoZone.classList.remove("hidden");
     txtAddPhoto.classList.add("hidden");
@@ -195,12 +213,7 @@ if (token) {
       displayWork(newWork);
       formView.classList.add("hidden");
       galleryView.classList.remove("hidden");
-      addProjectForm.reset();
-      imgPhotoZone.classList.add("hidden"); // hide the preview
-      txtAddPhoto.classList.remove("hidden"); // show the add photo button
-      iconPhoto.classList.remove("hidden"); // show the icon
-      typePhoto.classList.remove("hidden"); // show the type file info
-      checkForm()// disable the submit button again
+      resetForm();
     }
   });
 } else {
@@ -217,4 +230,13 @@ function checkForm() {
   } else {
     btnSubmit.disabled = true;
   }
+}
+function resetForm() {
+  addProjectForm.reset();
+  imgPhotoZone.classList.add("hidden"); // hide the preview
+  txtAddPhoto.classList.remove("hidden"); // show the add photo button
+  iconPhoto.classList.remove("hidden"); // show the icon
+  typePhoto.classList.remove("hidden"); // show the type file info
+  errorFile.textContent = "";
+  checkForm(); // disable the submit button again
 }
