@@ -193,6 +193,14 @@ if (token) {
       // ← ici
       const newWork = await response.json();
       displayWork(newWork);
+      formView.classList.add("hidden");
+      galleryView.classList.remove("hidden");
+      addProjectForm.reset();
+      imgPhotoZone.classList.add("hidden"); // hide the preview
+      txtAddPhoto.classList.remove("hidden"); // show the add photo button
+      iconPhoto.classList.remove("hidden"); // show the icon
+      typePhoto.classList.remove("hidden"); // show the type file info
+      checkForm()// disable the submit button again
     }
   });
 } else {
