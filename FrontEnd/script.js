@@ -4,7 +4,6 @@ let login = document.querySelector(".login-link");
 let editMode = document.querySelector(".edit-mode");
 let editButton = document.querySelector(".edit-button");
 let modalOverlay = document.querySelector(".modal-overlay");
-let modal = document.querySelectorAll(".modal");
 let closeButtons = document.querySelectorAll(".close-button");
 let modalGallery = document.querySelector(".modal-gallery");
 let galleryView = document.querySelector(".gallery-view");
@@ -21,7 +20,6 @@ let titleInput = document.querySelector(".title-input");
 let btnSubmit = document.querySelector(".btn-submit");
 let addProjectForm = document.querySelector(".add-project-form");
 let errorFile = document.querySelector(".error-file");
-
 let works = [];
 const urlApi = "http://localhost:5678/api/";
 async function getWorks() {
@@ -58,7 +56,6 @@ function displayWork(work) {
   thumbnail.appendChild(deleteButton);
   deleteButton.addEventListener("click", async (event) => {
     event.preventDefault();
-    console.log(deleteButton.dataset.id);
     let removeProjects = await fetch(
       urlApi + "works/" + deleteButton.dataset.id,
       {
@@ -129,19 +126,19 @@ if (token) {
   filters.classList.add("hidden");
   editButton.classList.remove("hidden");
 
-  //  Pour la déconnexion
+  //  Log out and reload the page
   login.addEventListener("click", (event) => {
     event.preventDefault();
     sessionStorage.removeItem("token");
     window.location.reload();
   });
-  //  Pour ouvrir la modale
+  //  Open the modal
   editButton.addEventListener("click", () => {
     modalOverlay.classList.remove("hidden");
     formView.classList.add("hidden");
     galleryView.classList.remove("hidden");
   });
-  // Fermer avec les croix
+  // Close the modal with the close buttons
   closeButtons.forEach((button) => {
     button.addEventListener("click", () => {
       modalOverlay.classList.add("hidden");
@@ -149,7 +146,7 @@ if (token) {
     });
   });
 
-  // Fermer en cliquant en dehors de la fenêtre
+  // Close the modal when clicking outside of it
   modalOverlay.addEventListener("click", (event) => {
     if (event.target === modalOverlay) {
       modalOverlay.classList.add("hidden");
@@ -167,7 +164,10 @@ if (token) {
     resetForm();
   });
   fileInput.addEventListener("change", () => {
-    let file = fileInput.files[0]; // je range l'image dans "file"
+    let file = fileInput.files[0]; // store the selected file.
+    if (!file) {
+      return;
+    }
     const allowedTypes = ["image/png", "image/jpeg"];
     if (file.size > 4 * 1024 * 1024) {
       errorFile.textContent = "Image trop lourde (4 Mo max)";
@@ -177,17 +177,17 @@ if (token) {
     if (!allowedTypes.includes(file.type)) {
       errorFile.textContent = "Format non accepté (jpg,png)";
       fileInput.value = "";
-
       return;
     }
-    errorFile.textContent = "";;
-    imgPhotoZone.src = URL.createObjectURL(fileInput.files[0]);
+    errorFile.textContent = "";
+    imgPhotoZone.src = URL.createObjectURL(file);
     imgPhotoZone.classList.remove("hidden");
     txtAddPhoto.classList.add("hidden");
     iconPhoto.classList.add("hidden");
     typePhoto.classList.add("hidden");
     checkForm();
   });
+
   titleInput.addEventListener("input", () => {
     checkForm();
   });
@@ -207,8 +207,8 @@ if (token) {
       headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       body: formData,
     });
+
     if (response.ok) {
-      // ← ici
       const newWork = await response.json();
       displayWork(newWork);
       formView.classList.add("hidden");
