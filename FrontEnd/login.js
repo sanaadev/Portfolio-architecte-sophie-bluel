@@ -1,9 +1,11 @@
 const urlApi = "http://localhost:5678/api/";
-let form = document.querySelector("form");
+let loginForm = document.querySelector(".login-form");
 let inputEmail = document.getElementById("email");
 let inputPassword = document.getElementById("password");
 let errorMessage = document.querySelector(".error-message");
-form.addEventListener("submit", async (event) => {
+
+// Send the email and password to the API, then store the token and go to the home page
+loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   let email = inputEmail.value;
   let password = inputPassword.value;
@@ -17,6 +19,6 @@ form.addEventListener("submit", async (event) => {
     sessionStorage.setItem("token", data.token);
     window.location.href = "index.html";
   } else {
-    errorMessage.textContent ="Erreur dans l'identifiant ou le mot de passe" ;
+    errorMessage.textContent = "Erreur dans l'identifiant ou le mot de passe";
   }
 });
