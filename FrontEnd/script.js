@@ -34,7 +34,6 @@ async function getWorks() {
 }
 getWorks();
 
-
 // Display a work in the gallery and in the modal, with its delete button
 function displayWork(work) {
   let figureElement = document.createElement("figure");
@@ -132,19 +131,20 @@ if (token) {
   filters.classList.add("hidden");
   editButton.classList.remove("hidden");
 
-  //  Log out and reload the page
+  // Log out and reload the page
   login.addEventListener("click", (event) => {
     event.preventDefault();
     sessionStorage.removeItem("token");
     window.location.reload();
   });
 
+  // Open the modal
   editButton.addEventListener("click", () => {
     modalOverlay.classList.remove("hidden");
     formView.classList.add("hidden");
     galleryView.classList.remove("hidden");
   });
-  
+
   // Close the modal with the close buttons
   closeButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -153,6 +153,7 @@ if (token) {
     });
   });
 
+  // Close the modal when clicking outside of it
   modalOverlay.addEventListener("click", (event) => {
     if (event.target === modalOverlay) {
       modalOverlay.classList.add("hidden");
@@ -171,8 +172,9 @@ if (token) {
     resetForm();
   });
 
+  // Check the selected file and show its preview
   fileInput.addEventListener("change", () => {
-    let file = fileInput.files[0]; 
+    let file = fileInput.files[0];
     if (!file) {
       return;
     }
@@ -196,6 +198,7 @@ if (token) {
     checkForm();
   });
 
+  // Update the submit button state when the title or the category changes
   titleInput.addEventListener("input", () => {
     checkForm();
   });
@@ -204,6 +207,7 @@ if (token) {
     checkForm();
   });
 
+  // Send the new work to the API and display it
   addProjectForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -224,7 +228,7 @@ if (token) {
       resetForm();
     } else {
       errorForm.textContent =
-        "Erreur lors de l'ajout. Reconnectez-vous et réessayez";
+        "Erreur lors de l'ajout. Reconnectez-vous et réessayez.";
     }
   });
 } else {
@@ -247,11 +251,11 @@ function checkForm() {
 // Reset the add form to its initial state (fields, photo preview, error messages, submit button)
 function resetForm() {
   addProjectForm.reset();
-  imgPhotoZone.classList.add("hidden"); 
-  txtAddPhoto.classList.remove("hidden"); 
-  iconPhoto.classList.remove("hidden"); 
-  typePhoto.classList.remove("hidden"); 
+  imgPhotoZone.classList.add("hidden");
+  txtAddPhoto.classList.remove("hidden");
+  iconPhoto.classList.remove("hidden");
+  typePhoto.classList.remove("hidden");
   errorFile.textContent = "";
   errorForm.textContent = "";
-  checkForm(); 
+  checkForm();
 }
