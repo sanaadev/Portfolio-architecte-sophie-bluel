@@ -113,9 +113,13 @@
             <i class="fa-solid fa-xmark"></i>
           </button>
           <h3 class="title-add-photo">Ajout photo</h3>
-          <form  class= "add-project-form" action="#">
+          <form class="add-project-form" action="#">
             <div class="photo-zone">
-              <img  class="img-photo-zone hidden" src="" alt="Aperçu de la photo">
+              <img
+                class="img-photo-zone hidden"
+                src=""
+                alt="Aperçu de la photo"
+              />
               <i class="fa-regular fa-image icon-photo"></i>
               <label class="txt-add-photo" for="image">+ Ajouter photo</label>
               <input
@@ -127,14 +131,15 @@
               />
               <p class="type-photo">jpg, png : 4mo max</p>
             </div>
-            <p class="error-message error-file"></p> 
-            <label   for="title">Titre</label>
-            <input  class= "title-input" type="text" name="title" id="title" />
+            <p class="error-message error-file"></p>
+            <label for="title">Titre</label>
+            <input class="title-input" type="text" name="title" id="title" />
             <label for="category">Catégorie</label>
             <select name="category" id="category">
               <option value=""></option>
             </select>
             <hr />
+            <p class="error-message error-form"></p>
             <button class="btn-submit" type="submit" disabled>Valider</button>
           </form>
         </div>

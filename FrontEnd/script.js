@@ -20,8 +20,11 @@ let titleInput = document.querySelector(".title-input");
 let btnSubmit = document.querySelector(".btn-submit");
 let addProjectForm = document.querySelector(".add-project-form");
 let errorFile = document.querySelector(".error-file");
+let errorForm = document.querySelector(".error-form");
 let works = [];
 const urlApi = "http://localhost:5678/api/";
+
+// Fetch all works from the API and display them
 async function getWorks() {
   const response = await fetch(urlApi + "works");
   works = await response.json();
@@ -31,6 +34,8 @@ async function getWorks() {
 }
 getWorks();
 
+
+// Display a work in the gallery and in the modal, with its delete button
 function displayWork(work) {
   let figureElement = document.createElement("figure");
   figureElement.dataset.category = work.categoryId;
@@ -73,6 +78,7 @@ function displayWork(work) {
   });
 }
 
+// Fetch categories from the API, then create the filter buttons and the select options
 async function getCategories() {
   let response = await fetch(urlApi + "categories");
   let categories = await response.json();
@@ -132,12 +138,13 @@ if (token) {
     sessionStorage.removeItem("token");
     window.location.reload();
   });
-  //  Open the modal
+
   editButton.addEventListener("click", () => {
     modalOverlay.classList.remove("hidden");
     formView.classList.add("hidden");
     galleryView.classList.remove("hidden");
   });
+  
   // Close the modal with the close buttons
   closeButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -146,7 +153,6 @@ if (token) {
     });
   });
 
-  // Close the modal when clicking outside of it
   modalOverlay.addEventListener("click", (event) => {
     if (event.target === modalOverlay) {
       modalOverlay.classList.add("hidden");
@@ -158,13 +164,15 @@ if (token) {
     galleryView.classList.add("hidden");
     formView.classList.remove("hidden");
   });
+
   backButton.addEventListener("click", () => {
     formView.classList.add("hidden");
     galleryView.classList.remove("hidden");
     resetForm();
   });
+
   fileInput.addEventListener("change", () => {
-    let file = fileInput.files[0]; // store the selected file.
+    let file = fileInput.files[0]; 
     if (!file) {
       return;
     }
@@ -203,7 +211,7 @@ if (token) {
     formData.append("image", fileInput.files[0]);
     formData.append("category", categorySelect.value);
     const response = await fetch(urlApi + "works", {
-      method: "post",
+      method: "POST",
       headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       body: formData,
     });
@@ -214,12 +222,16 @@ if (token) {
       formView.classList.add("hidden");
       galleryView.classList.remove("hidden");
       resetForm();
+    } else {
+      errorForm.textContent =
+        "Erreur lors de l'ajout. Reconnectez-vous et réessayez";
     }
   });
 } else {
   login.textContent = "login";
 }
 
+// Enable the submit button only if the image, title and category are filled
 function checkForm() {
   if (
     titleInput.value !== "" &&
@@ -231,12 +243,15 @@ function checkForm() {
     btnSubmit.disabled = true;
   }
 }
+
+// Reset the add form to its initial state (fields, photo preview, error messages, submit button)
 function resetForm() {
   addProjectForm.reset();
-  imgPhotoZone.classList.add("hidden"); // hide the preview
-  txtAddPhoto.classList.remove("hidden"); // show the add photo button
-  iconPhoto.classList.remove("hidden"); // show the icon
-  typePhoto.classList.remove("hidden"); // show the type file info
+  imgPhotoZone.classList.add("hidden"); 
+  txtAddPhoto.classList.remove("hidden"); 
+  iconPhoto.classList.remove("hidden"); 
+  typePhoto.classList.remove("hidden"); 
   errorFile.textContent = "";
-  checkForm(); // disable the submit button again
+  errorForm.textContent = "";
+  checkForm(); 
 }
