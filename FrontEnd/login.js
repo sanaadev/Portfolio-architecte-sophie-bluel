@@ -9,16 +9,21 @@ loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   let email = inputEmail.value;
   let password = inputPassword.value;
-  let response = await fetch(urlApi + "users/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email: email, password: password }),
-  });
-  const data = await response.json();
-  if (response.ok) {
-    sessionStorage.setItem("token", data.token);
-    window.location.href = "index.html";
-  } else {
-    errorMessage.textContent = "Erreur dans l'identifiant ou le mot de passe";
+  try {
+    let response = await fetch(urlApi + "users/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email, password: password }),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      sessionStorage.setItem("token", data.token);
+      window.location.href = "index.html";
+    } else {
+      errorMessage.textContent = "Erreur dans l'identifiant ou le mot de passe";
+    }
+  } catch (error) {
+    errorMessage.textContent =
+      "Impossible de contacter le serveur, veuillez recommencer.";
   }
 });
