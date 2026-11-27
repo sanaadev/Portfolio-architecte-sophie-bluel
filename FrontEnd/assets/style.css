@@ -148,6 +148,34 @@ body {
   transform: translateX(-50%);
   gap: 5px;
 }
+
+.myprojects {
+  position: relative;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin: 0 auto 20px;
+}
+.edit-button {
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fffef8;
+  gap: 5px;
+  font-family: "Work Sans";
+  font-size: 14px;
+  cursor: pointer;
+  position: absolute;
+  left: 100%;
+  margin-left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Hide the horizontal scrollbar caused by the 100vw edit-mode banner */
 html {
   overflow-x: hidden;
 }
@@ -318,7 +346,8 @@ footer nav ul {
   justify-content: flex-end;
   margin: 2em;
 }
-/* *********css login.page **************** */
+
+/* ===== Login page ===== */
 
 nav a {
   color: inherit;
@@ -379,32 +408,6 @@ nav a {
   text-align: center;
   color: #3d3d3d;
   font-size: 14px;
-}
-
-.myprojects {
-  position: relative;
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  justify-content: center;
-  width: fit-content;
-  margin: 0 auto 20px;
-}
-.edit-button {
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fffef8;
-  gap: 5px;
-  font-family: "Work Sans";
-  font-size: 14px;
-  cursor: pointer;
-  position: absolute;
-  left: 100%;
-  margin-left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 /* ===== Modal ===== */
@@ -505,7 +508,8 @@ nav a {
   font-size: 11px;
 }
 
-/* ===== Modal : view form ===== */
+/* ===== Modal: form view ===== */
+
 .back-button {
   position: absolute;
   top: 20px;
@@ -514,6 +518,7 @@ nav a {
   background: none;
   font-size: 21px;
   color: #000;
+  cursor: pointer;
 }
 
 .title-add-photo {
@@ -541,7 +546,7 @@ nav a {
   height: 169px;
 }
 
-.photo-zone i {
+.icon-photo {
   color: #b9b5cc;
   font-size: 60px;
 }
@@ -560,6 +565,7 @@ nav a {
   color: #306685;
   padding: 5px 5px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .load-file {
@@ -592,12 +598,17 @@ nav a {
   font-weight: 700;
   font-size: 14px;
   background: #1d6154;
+  cursor: pointer;
 }
 
 /* when the button is disabled */
 .btn-submit:disabled {
   background: #a7a7a7;
+  cursor: not-allowed;
 }
+
+/* ===== Utilities ===== */
+/* Must stay last: overrides the display of other rules */
 
 .hidden {
   display: none;
