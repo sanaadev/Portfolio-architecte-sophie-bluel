@@ -21,6 +21,7 @@ let btnSubmit = document.querySelector(".btn-submit");
 let addProjectForm = document.querySelector(".add-project-form");
 let errorFile = document.querySelector(".error-file");
 let errorForm = document.querySelector(".error-form");
+let myProjects = document.querySelector(".myprojects");
 let works = [];
 const urlApi = "http://localhost:5678/api/";
 
@@ -129,6 +130,7 @@ if (token) {
   login.textContent = "logout";
   editMode.classList.remove("hidden");
   filters.classList.add("hidden");
+  myProjects.classList.add("space-edit-mode");
   editButton.classList.remove("hidden");
 
   // Log out and reload the page
