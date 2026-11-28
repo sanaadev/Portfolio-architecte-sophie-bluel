@@ -237,7 +237,7 @@ if (token) {
   login.textContent = "login";
 }
 
-// Enable the submit button only if the image, title and category are filled
+// Enable the submit button only if all fields are filled, and show a message if the form is incomplete
 function checkForm() {
   if (
     titleInput.value !== "" &&
@@ -245,8 +245,18 @@ function checkForm() {
     categorySelect.value !== ""
   ) {
     btnSubmit.disabled = false;
+    errorForm.textContent = "";
+  } else if (
+    titleInput.value !== "" ||
+    fileInput.files.length !== 0 ||
+    categorySelect.value !== ""
+  ) {
+    errorForm.textContent =
+      "Tous les champs sont obligatoires : photo, titre et catégorie.";
+    btnSubmit.disabled = true;
   } else {
     btnSubmit.disabled = true;
+    errorForm.textContent = "";
   }
 }
 
