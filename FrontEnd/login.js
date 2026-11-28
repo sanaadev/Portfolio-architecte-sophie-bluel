@@ -20,7 +20,7 @@ loginForm.addEventListener("submit", async (event) => {
       sessionStorage.setItem("token", data.token);
       window.location.href = "index.html";
     } else {
-      errorMessage.textContent = "Erreur dans l'identifiant ou le mot de passe";
+      errorMessage.textContent = "Erreur dans l'identifiant ou le mot de passe.";
     }
   } catch (error) {
     errorMessage.textContent =
